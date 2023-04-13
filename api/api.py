@@ -1,7 +1,13 @@
 import time
-import requests
+import urllib.request
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize, sent_tokenize
 from bs4 import BeautifulSoup
 from flask import Flask
+
+nltk.download('punkt')
+nltk.download('stopwords')
 
 app = Flask(__name__)
 
@@ -21,27 +27,46 @@ def get_current_time():
 @app.route('/summary')
 def get_summary():
 
-    # Assign URL
-    url = "https://saumyagupta.hashnode.dev/apis-for-beginners-understanding-what-they-are-how-they-work"
+    # Step 1: Data collection from Wikipedia using web scraping
+    url = "https://yuvichh.hashnode.dev/i-tried-open-source-for-1-year"
+    article_content = urllib.request.urlopen(url)
 
-    # Fetch raw HTML content
-    html_content = requests.get(url).text
+    article = article_content.read()
 
-    # Now that the content is ready, iterate
-    # through the content using BeautifulSoup:
-    soup = BeautifulSoup(html_content, "html.parser")
+    article_parsed = BeautifulSoup(article, 'html.parser')
+    title = article_parsed.find('title').text
+    paragraphs = article_parsed.find_all('p')
+    text = ''
+    for p in paragraphs:
+        text += p.text
 
-    # Find the title tag in the HTML content and get the text of the title
-    title_tag = soup.find("title")
-    title = title_tag.text
+    # Step 3: Data clean-up
+    stop_words = set(stopwords.words("english"))
+    words = word_tokenize(text)
+    words = [word.lower() for word in words if word.isalpha() and word not in stop_words]
 
-    # get all the occurrences of a p tag
-    texts = soup.find_all('p')
-    extracted_text = ""
-    for text in texts:
-        extracted_text += text.get_text() + " "
-        if (len(extracted_text) > 3000):
-            break
+    # Step 4: Tokenization
+    sentences = sent_tokenize(text)
+
+    # Step 5: Calculate word frequency
+    word_freq = nltk.FreqDist(words)
+
+    # Step 6: Calculate weighted frequency for each sentence
+    sent_scores = {}
+    for sentence in sentences:
+        for word in nltk.word_tokenize(sentence.lower()):
+            if word in word_freq.keys():
+                if len(sentence.split(" ")) < 30:
+                    if sentence not in sent_scores.keys():
+                        sent_scores[sentence] = word_freq[word]
+                    else:
+                        sent_scores[sentence] += word_freq[word]
+
+    # Step 7: Creation of summary by choosing 30% of top weighted sentences
+    total_sent = len(sentences)
+    summary_size = round(total_sent * 0.1)
+    summary = " ".join([sent[0] for sent in sorted(sent_scores.items(), key=lambda x: x[1], reverse=True)[:summary_size]])
 
     return {'title': title,
-            'url': url}
+            'url': url,
+            'gist': summary}
