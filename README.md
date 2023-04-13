@@ -16,8 +16,10 @@ You may also see any lint errors in the console.
 
 ### Running the Flask backend
 To install allOpen a separate terminal:
-1. Go to api directory by command `cd api` and Run `. source venv/bin/activate` to start the virtual environment
-2. Run `pip freeze > requirements.txt`
+1. Go to api directory by command `cd api`
+2. Create a virtual environment `python -m venv venv`
+3. Run `. venv/bin/activate` to start the virtual environment
+4. Run `pip install -r requirements.txt`
 
 Open a spearate terminal to run the backend:
 1. Run `cd api && venv/bin/flask run --no-dubugger`
