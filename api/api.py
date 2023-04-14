@@ -4,7 +4,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from bs4 import BeautifulSoup
-from flask import Flask
+from flask import Flask , request , url_for , redirect
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -24,11 +24,13 @@ def get_current_time():
 
     return {'time': time_string}
 
-@app.route('/summary')
+@app.route('/' , methods=['POST','GET'])
 def get_summary():
 
     # Step 1: Data collection from Wikipedia using web scraping
-    url = "https://yuvichh.hashnode.dev/i-tried-open-source-for-1-year"
+     
+    url=request.form.get('url')
+    
     article_content = urllib.request.urlopen(url)
 
     article = article_content.read()
