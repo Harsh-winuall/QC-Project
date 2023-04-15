@@ -24,12 +24,19 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+
         <form className='App' onSubmit={handleSubmit}>
           <label htmlFor='url'>
             <pre>Input Your Link:</pre>
-            <input type="url" name="url" className='inputurl' placeholder='Paste your url here' id='url' required onChange={(e) => setUrl(e.target.value)}/>
+            <input 
+              type="url" name="url" 
+              className='inputurl' 
+              placeholder='Paste your url here' 
+              id='url' 
+              required 
+              onChange={(e) => setUrl(e.target.value)} />
           </label>
-          <input type="submit" value="submit" name='url' id='url'/>
+          <input type="submit" value="submit" name='url' id='url' />
         </form>
 
         <p>Title: {title}</p>
