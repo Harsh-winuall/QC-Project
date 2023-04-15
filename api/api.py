@@ -28,7 +28,7 @@ def get_current_time():
 def get_summary():
 
     # Step 1: Data collection from Wikipedia using web scraping
-    url = "https://yuvichh.hashnode.dev/i-tried-open-source-for-1-year"
+    url = "https://www.cncf.io/blog/2023/04/12/stability-and-scalability-assessment-of-kubevela/"
     article_content = urllib.request.urlopen(url)
 
     article = article_content.read()
@@ -62,7 +62,7 @@ def get_summary():
                     else:
                         sent_scores[sentence] += word_freq[word]
 
-    # Step 7: Creation of summary by choosing 30% of top weighted sentences
+    # Step 7: Creation of summary by choosing 10% of top weighted sentences
     total_sent = len(sentences)
     summary_size = round(total_sent * 0.1)
     summary = " ".join([sent[0] for sent in sorted(sent_scores.items(), key=lambda x: x[1], reverse=True)[:summary_size]])
