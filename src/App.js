@@ -1,33 +1,40 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [gist, setGist] = useState("");
 
-  const [currentTime, setCurrentTime] = useState(0);
-  const [url, setUrl] = useState(0);
-  const [title, setTitle] = useState(0);
-  const [gist, setGist] = useState(0)
+  function handleSubmit(event) {
+    event.preventDefault(); // prevent default form submission behavior
+    // perform any necessary form validation here
 
-  useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
+    // send the form data to the server using an HTTP POST request
+    fetch("/api/summary", {
+      method: "POST",
+      body: new FormData(event.target)
+    }).then(res => res.json()).then(data => {
+      setTitle(data.title)
+      setGist(data.gist)
     })
-
-    fetch('/summary').then(res=> res.json()).then(data => {
-      setTitle(data.title);
-      setUrl(data.url);
-      setGist(data.gist);
-    })
-  }, [])
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>The current time is {currentTime}</p>
-        <p>Url of post: {url}</p>
+        <form className='App' onSubmit={handleSubmit}>
+          <label htmlFor='url'>
+            <pre>Input Your Link:</pre>
+            <input type="url" name="url" className='inputurl' placeholder='Paste your url here' id='url' required onChange={(e) => setUrl(e.target.value)}/>
+          </label>
+          <input type="submit" value="submit" name='url' id='url'/>
+        </form>
+
         <p>Title: {title}</p>
         <p>Gist: {gist}</p>
+
       </header>
     </div>
   );

@@ -4,31 +4,20 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from bs4 import BeautifulSoup
-from flask import Flask
+from flask import Flask , request , url_for , redirect
 
 nltk.download('punkt')
 nltk.download('stopwords')
 
 app = Flask(__name__)
 
-@app.route('/time')
-def get_current_time():
-    # Get the current time as a floating-point value
-    timestamp = time.time()
-
-    # Convert the timestamp to a time tuple
-    time_tuple = time.localtime(timestamp)
-
-    # Format the time tuple as a string
-    time_string = time.strftime("%Y-%m-%d %H:%M:%S", time_tuple)
-
-    return {'time': time_string}
-
-@app.route('/summary')
+@app.route('/api/summary' , methods=['POST','GET'])
 def get_summary():
 
-    # Step 1: Data collection from Wikipedia using web scraping
-    url = "https://www.cncf.io/blog/2023/04/12/stability-and-scalability-assessment-of-kubevela/"
+    # Step 1: Data collection from url
+     
+    url=request.form.get('url')
+    
     article_content = urllib.request.urlopen(url)
 
     article = article_content.read()
