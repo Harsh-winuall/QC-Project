@@ -858,14 +858,20 @@ a:hover {
 
 
 /* Mic Tester */
+.mic-test-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .mic-tester {
   width: 80%;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  text-align: center;
 }
 
 .mic-tester h2 {
@@ -873,35 +879,99 @@ a:hover {
   margin-bottom: 20px;
 }
 
-.mic-tester .error {
+.error {
   color: red;
   font-weight: bold;
-  text-align: center;
   margin-bottom: 20px;
 }
 
 .record-button {
   background-color: #007bff;
+  color: #fff;
   padding: 12px 24px;
+  border: none;
   border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .record-button:hover {
   background-color: #0056b3;
 }
 
-.mic-tester .mic-status label {
-  padding: 10px 20px;
-  background-color: #e9ecef;
-  border-radius: 6px;
+.mic-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mic-status label {
+  font-size: 18px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.mic-status input[type="radio"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
+  margin-top: 20px;
   transition: background-color 0.3s ease;
 }
 
-.mic-tester .mic-status input[type="radio"]:checked + label {
-  background-color: #28a745;
-  color: white;
+.submit-button:hover {
+  background-color: #0056b3;
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .mic-tester {
+    width: 90%;
+  }
+
+  .record-button,
+  .submit-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .mic-status label {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .mic-tester {
+    width: 100%;
+    margin: 10px;
+  }
+
+  .record-button,
+  .submit-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .mic-status label {
+    font-size: 14px;
+    margin: 6px 0;
+  }
+}
+
 
 /* Trackpad Tester */
 .trackpad-tester {
