@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Header from '../Header';
 
 const TrackpadTester = ({ onNext }) => {
   const [currentTest, setCurrentTest] = useState(0);
@@ -66,46 +67,49 @@ const TrackpadTester = ({ onNext }) => {
   }, [currentTest]);
 
   return (
-    <div className="trackpad-tester">
-      <h2>Trackpad Test</h2>
+    <div className="trackpad-test-container">
+      <Header/>
+      <div className="trackpad-tester">
+        <h2>Trackpad Test</h2>
 
-      {feedback && <p className="feedback">{feedback}</p>}
+        {feedback && <p className="feedback">{feedback}</p>}
 
-      <p>Please highlight the following text from the paragraph below:</p>
-      <div className="highlighted-text">
-        <strong>{highlightedText}</strong>
-      </div>
-
-      <div ref={textRef} className="paragraph" onMouseUp={handleTextHighlight}>
-        <span>{paragraph}</span>
-      </div>
-
-      <button onClick={handleNextRound} disabled={feedback !== 'Correct!'}>
-        {currentTest < tests.length - 1 ? 'Next' : 'Finish'}
-      </button>
-
-      {currentTest === tests.length - 1 && feedback === 'Correct!' && (
-        <div className="trackpad-status">
-          <h3>How would you rate the trackpad?</h3>
-          <div className="status-options">
-            {[
-              'Blemished', 'Buttons not working', 'Faded', 'Functional', 'Good',
-              'Low Sensitivity', 'Non-Functional', 'Not Smooth', 'Partially Functional', 'Perfect',
-            ].map((status) => (
-              <label key={status}>
-                <input
-                  type="radio"
-                  name="trackpadStatus"
-                  value={status}
-                  onChange={(e) => setTrackpadStatus(e.target.value)}
-                />
-                {status}
-              </label>
-            ))}
-          </div>
-          <button onClick={handleSubmit} className="submit-button">Next</button>
+        <p>Please highlight the following text from the paragraph below:</p>
+        <div className="highlighted-text">
+          <strong>{highlightedText}</strong>
         </div>
-      )}
+
+        <div ref={textRef} className="paragraph" onMouseUp={handleTextHighlight}>
+          <span>{paragraph}</span>
+        </div>
+
+        <button onClick={handleNextRound} disabled={feedback !== 'Correct!'}>
+          {currentTest < tests.length - 1 ? 'Next' : 'Finish'}
+        </button>
+
+        {currentTest === tests.length - 1 && feedback === 'Correct!' && (
+          <div className="trackpad-status">
+            <h3>How would you rate the trackpad?</h3>
+            <div className="status-options">
+              {[
+                'Blemished', 'Buttons not working', 'Faded', 'Functional', 'Good',
+                'Low Sensitivity', 'Non-Functional', 'Not Smooth', 'Partially Functional', 'Perfect',
+              ].map((status) => (
+                <label key={status}>
+                  <input
+                    type="radio"
+                    name="trackpadStatus"
+                    value={status}
+                    onChange={(e) => setTrackpadStatus(e.target.value)}
+                  />
+                  {status}
+                </label>
+              ))}
+            </div>
+            <button onClick={handleSubmit} className="submit-button">Next</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -974,28 +974,39 @@ a:hover {
 
 
 /* Trackpad Tester */
+.trackpad-test-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .trackpad-tester {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   text-align: center;
-  margin: 20px;
+  font-family: 'Inter', sans-serif;
 }
 
-.number-test, .line-test {
-  margin: 20px 0;
+.trackpad-tester h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-.number-options button, .line-options button {
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 16px;
-  margin: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.feedback {
+  font-size: 18px;
+  color: green;
+  margin-bottom: 20px;
 }
 
-.number-options button:hover, .line-options button:hover {
-  background-color: #ddd;
+.highlighted-text {
+  background-color: #ffff99;
+  padding: 5px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .paragraph {
@@ -1005,12 +1016,24 @@ a:hover {
   border: 1px solid #ddd;
   background-color: #f5f5f5;
   line-height: 1.6;
+  font-size: 16px;
+  text-align: left;
 }
 
-.highlighted-text {
-  background-color: #ffff99;
-  padding: 5px;
-  font-weight: bold;
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 .trackpad-status {
@@ -1019,42 +1042,136 @@ a:hover {
 }
 
 .status-options label {
+  display: block;
   margin: 5px 0;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.feedback {
-  font-size: 18px;
-  color: green;
+.status-options input[type="radio"] {
+  margin-right: 8px;
+  transform: scale(1.2);
 }
 
-/* Display Tester */
-.display-tester {
-  text-align: center;
-  padding: 20px;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .trackpad-tester {
+    width: 90%;
+  }
+
+  .paragraph {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .status-options label {
+    font-size: 14px;
+  }
 }
 
-.navigation-buttons {
-  margin: 20px 0;
+@media (max-width: 480px) {
+  .trackpad-tester {
+    width: 100%;
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .paragraph {
+    font-size: 12px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .status-options label {
+    font-size: 12px;
+  }
 }
 
-.navigation-buttons button {
-  padding: 12px 24px;
-  border-radius: 6px;
+
+/* QC Process */
+
+
+/* QCProcess styles */
+.progress-bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+  position: relative;
 }
 
-.display-status label {
-  display: block;
-  margin: 10px 0;
-}
-
-.submit-button {
-  margin-top: 20px;
-  background-color: #007bff;
-  padding: 12px 24px;
-  border-radius: 6px;
-}
-
-.submit-button:hover {
+.progress-marker {
+  height: 10px;
   background-color: #0056b3;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+  text-align: center;
+  color: #fff;
+  line-height: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+/* QC Form */
+
+/* QCForm styles */
+.qc-form {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: left;
+}
+
+.qc-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.qc-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.qc-form input[type="radio"] {
+  margin-right: 10px;
+}
+
+.qc-form button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: none;
+  background-color: #0056b3;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.qc-form button:hover {
+  background-color: #004494;
+}
+
+.qc-form button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
 }

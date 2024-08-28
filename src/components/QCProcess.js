@@ -41,14 +41,13 @@ const QCProcess = () => {
   const [currentQCIndex, setCurrentQCIndex] = useState(0);
   const [qcData, setQcData] = useState({});
 
-  const handleNext = (selectedOption) => {   // Takes the selected option from the QC Check and stores it to QCData Object and moves on to next QC..
+  const handleNext = (selectedOption) => {
     const currentQC = qcList[currentQCIndex].name;
     setQcData({ ...qcData, [currentQC]: selectedOption });
 
     if (currentQCIndex < qcList.length - 1) {
       setCurrentQCIndex(currentQCIndex + 1);
     } else {
-      // Submit all QC data to the backend in JSON format
       console.log('Submitting all QC data:', qcData);
       fetch('/api/submit_all_qcs', {
         method: 'POST',
@@ -63,8 +62,9 @@ const QCProcess = () => {
         });
     }
   };
-  const currentQC = qcList[currentQCIndex];  // Object of QC
-  let progressMarkWidth = Math.floor((currentQCIndex*100)/(qcList.length));
+
+  const currentQC = qcList[currentQCIndex];
+  let progressMarkWidth = Math.floor((currentQCIndex * 100) / (qcList.length));
 
   return (
     <div>
@@ -74,34 +74,30 @@ const QCProcess = () => {
         ) : currentQC.type === 'cameraTester' ? (
           <CameraTester onNext={handleNext} />
         ) : currentQC.type === 'speakerTester' ? (
-          <SpeakerTester onNext={handleNext}/>
+          <SpeakerTester onNext={handleNext} />
         ) : currentQC.type === 'micTester' ? (
           <MicTester onNext={handleNext} />
         ) : currentQC.type === 'trackpadTester' ? (
-          <TrackpadTester onNext={handleNext} /> ) 
-          : currentQC.type === 'displayTester' ? (
-            <DisplayTester onNext={handleNext}/>
-          ) : (
+          <TrackpadTester onNext={handleNext} />
+        ) : currentQC.type === 'displayTester' ? (
+          <DisplayTester onNext={handleNext} />
+        ) : (
           <QCForm qc={currentQC} onNext={handleNext} />
         )
       ) : (
         <h2>All QCs Completed!</h2>
       )}
 
-      {/* <div className='progress-bar-container'>
+      <div className='progress-bar-container'>
         <div
           className='progress-marker'
           style={{
             width: `${progressMarkWidth}%`,
-            backgroundColor: '#0056b3',
-            height: '10px',
-            fontSize: '8px',
-            color: 'white',
           }}
         >
-          {progressMarkWidth} %
+          {progressMarkWidth}%
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
