@@ -131,6 +131,7 @@ a:hover {
 .welcome-screen-header {
   display: flex;
   position: sticky;
+  width: 100%;
   z-index: 30;
   top: 0;
   left: 0;
@@ -761,6 +762,12 @@ a:hover {
 
 
 /* Speaker Tester */
+.speaker-test-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .speaker-tester {
   text-align: center;
   margin: 20px;
@@ -768,9 +775,14 @@ a:hover {
 
 .play-audio-button {
   background-color: #007bff;
+  color: #fff;
   padding: 12px 24px;
+  border: none;
   border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
   margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .play-audio-button:hover {
@@ -779,20 +791,71 @@ a:hover {
 
 .speaker-status {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
 .speaker-status label {
   font-size: 18px;
-  margin: 10px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
 }
 
 .speaker-status input[type="radio"] {
-  margin-right: 10px;
+  margin-right: 8px;
   transform: scale(1.2);
   vertical-align: middle;
 }
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .speaker-test-container {
+    margin: 10px;
+  }
+
+  .play-audio-button,
+  .submit-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .speaker-status label {
+    font-size: 16px;
+    margin: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .play-audio-button,
+  .submit-button {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .speaker-status label {
+    font-size: 14px;
+    margin: 4px 0;
+  }
+}
+
 
 /* Mic Tester */
 .mic-tester {

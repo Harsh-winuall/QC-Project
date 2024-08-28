@@ -88,7 +88,7 @@ const QCProcess = () => {
         <h2>All QCs Completed!</h2>
       )}
 
-      <div className='progress-bar-container'>
+      {/* <div className='progress-bar-container'>
         <div
           className='progress-marker'
           style={{
@@ -101,7 +101,7 @@ const QCProcess = () => {
         >
           {progressMarkWidth} %
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
