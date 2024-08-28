@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Header from '../Header';
 
 const CameraTester = ({ onNext }) => {
   const [cameraStatus, setCameraStatus] = useState('');
@@ -43,52 +44,55 @@ const CameraTester = ({ onNext }) => {
   };
 
   return (
-    <div className="camera-tester">
-      <h2>Camera Test</h2>
-      <button onClick={startCamera} className="start-camera-button">Start Camera</button>
-      <div className="camera-feed">
-        <video ref={videoRef} autoPlay className="video-frame" />
+    <dic className="camera-tester-container">
+      <Header/>
+      <div className="camera-tester">
+        <h2>Camera Test</h2>
+        <button onClick={startCamera} className="start-camera-button">Start Camera</button>
+        <div className="camera-feed">
+          <video ref={videoRef} autoPlay className="video-frame" />
+        </div>
+        <div className="camera-status">
+          <label>
+            <input
+              type="radio"
+              name="cameraStatus"
+              value="Working"
+              onChange={(e) => setCameraStatus(e.target.value)}
+            />
+            Working
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="cameraStatus"
+              value="Not Working"
+              onChange={(e) => setCameraStatus(e.target.value)}
+            />
+            Not Working
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="cameraStatus"
+              value="Distorted Image"
+              onChange={(e) => setCameraStatus(e.target.value)}
+            />
+            Distorted Image
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="cameraStatus"
+              value="Foggy Image"
+              onChange={(e) => setCameraStatus(e.target.value)}
+            />
+            Foggy Image
+          </label>
+        </div>
+        <button onClick={handleSubmit} className="submit-button">Next</button>
       </div>
-      <div className="camera-status">
-        <label>
-          <input
-            type="radio"
-            name="cameraStatus"
-            value="Working"
-            onChange={(e) => setCameraStatus(e.target.value)}
-          />
-          Working
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="cameraStatus"
-            value="Not Working"
-            onChange={(e) => setCameraStatus(e.target.value)}
-          />
-          Not Working
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="cameraStatus"
-            value="Distorted Image"
-            onChange={(e) => setCameraStatus(e.target.value)}
-          />
-          Distorted Image
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="cameraStatus"
-            value="Foggy Image"
-            onChange={(e) => setCameraStatus(e.target.value)}
-          />
-          Foggy Image
-        </label>
-      </div>
-      <button onClick={handleSubmit} className="submit-button">Next</button>
-    </div>
+    </dic>
   );
 };
 
