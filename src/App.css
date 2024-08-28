@@ -1,39 +1,849 @@
-.App {
+/* General Styles */
+
+/* General Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1, h2 {
   text-align: center;
+  margin: 20px 0;
+  color: #444;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Buttons */
+button {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.App-header {
-  padding: 10px;
-  background-color: #282c34;
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Container Spacing */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Typography */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #555;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+/* Utility Classes */
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.pt-1 { padding-top: 10px; }
+.pt-2 { padding-top: 20px; }
+.pb-1 { padding-bottom: 10px; }
+.pb-2 { padding-bottom: 20px; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+
+
+/* Welcome Screen Container */
+.welcome-screen-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0f2f5;
+  /* padding: 20px; */
+}
+
+/* Header */
+.welcome-screen-header {
+  display: flex;
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 40px;
+  /* align-items: center; */
+  /* justify-content: center; */
+  background-color: #fff;
+  border-bottom: 2px solid #f0f2f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Welcome Screen Footer */
+.welcome-screen-footer {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid #e0e0e0;
+  margin-top: 40px;
+  /* box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.footer-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.footer-subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.footer-contact {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.footer-contact a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .welcome-screen-footer {
+    padding: 15px;
+  }
+  .footer-title {
+    font-size: 20px;
+  }
+  .footer-subtitle,
+  .footer-contact {
+    font-size: 14px;
+  }
+}
+
+/* Main Content */
+.welcome-screen-content {
+  flex: 1;
+  display: flex;
+  padding: 100px 60px;
   align-items: center;
   justify-content: center;
-  font-size: calc(5px + 2vmin);
+}
+
+/* Image Column */
+.welcome-screen-image-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-screen-image {
+  width: 100%;
+  max-width: 650px;
+}
+
+/* Form Column */
+.welcome-screen-form-col {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-screen-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Input Fields */
+.welcome-screen-input {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Button */
+.welcome-screen-button {
+  background: #007bff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 0;
+  border-radius: 8px;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.welcome-screen-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .welcome-screen-form-col {
+    padding: 20px 10px;
+  }
+  .welcome-screen-title {
+    font-size: 24px;
+  }
+  .welcome-screen-input {
+    font-size: 14px;
+  }
+  .welcome-screen-button {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+}
+
+
+/* UserDetailsForm */
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 24px;
+}
+.header-row {
+  margin-bottom: 24px;
+}
+.ant-col-md-16 {
+  margin-bottom: auto; /* Ensure spacing at the bottom */
+}
+
+.form-title {
+  font-size: 30px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  flex-grow: 1;
+  margin: 0;
+}
+
+.back-button {
+  font-size: 16px;
+  padding: 4px 12px;
+  border: none;
+  background: none;
+  color: #0056b3;
+  cursor: pointer;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-button {
+  background-color: #0056b3;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 0;
+  border-radius: 8px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  margin-top: 16px;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .form-title {
+    text-align: center;
+  }
+  
+  .header-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .back-button {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-container {
+    padding: 16px;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+
+  .form-button {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+}
+
+/* Start QC Page */
+
+.start-qc-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+/* General Styles */
+.keyboard-tester {
+  text-align: center;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.keyboard-tester h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.keyboard {
+  display: inline-block;
+  margin-bottom: 30px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+  flex-wrap: wrap;
+}
+
+.keyboard button {
+  color: #333;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 2px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.keyboard button.pressed {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Special Keys */
+.keyboard button.special {
+  min-width: 70px; /* Wider keys like Tab, Caps Lock, Shift */
+}
+
+.keyboard button.space {
+  min-width: 240px; /* Spacebar */
+}
+
+.keyboard button.enter {
+  min-width: 85px; /* Enter key */
+}
+
+.keyboard button.backspace {
+  min-width: 85px; /* Backspace key */
+}
+
+.keyboard button.shift {
+  min-width: 90px; /* Shift key */
+}
+
+.keyboard button.tab {
+  min-width: 60px; /* Tab key */
+}
+
+.keyboard button.ctrl,
+.keyboard button.alt,
+.keyboard button.windows,
+.keyboard button.fn {
+  min-width: 55px; /* Control, Alt, Windows, Fn keys */
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.submit-button:focus {
+  outline: none;
+}
+
+.submit-button:active {
+  background-color: #004085;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .keyboard button.special {
+    min-width: 60px;
+  }
+
+  .keyboard button.space {
+    min-width: 200px;
+  }
+
+  .keyboard button.enter,
+  .keyboard button.backspace,
+  .keyboard button.shift {
+    min-width: 75px;
+  }
+
+  .keyboard button.tab,
+  .keyboard button.ctrl,
+  .keyboard button.alt,
+  .keyboard button.windows,
+  .keyboard button.fn {
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .keyboard-tester h2 {
+    font-size: 22px;
+  }
+
+  .keyboard button {
+    font-size: 12px;
+    min-width: 35px;
+    min-height: 35px;
+  }
+
+  .keyboard button.special {
+    min-width: 55px;
+  }
+
+  .keyboard button.space {
+    min-width: 180px;
+  }
+
+  .keyboard button.enter,
+  .keyboard button.backspace,
+  .keyboard button.shift {
+    min-width: 70px;
+  }
+
+  .keyboard button.tab,
+  .keyboard button.ctrl,
+  .keyboard button.alt,
+  .keyboard button.windows,
+  .keyboard button.fn {
+    min-width: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .keyboard-tester h2 {
+    font-size: 20px;
+  }
+
+  .keyboard button {
+    font-size: 10px;
+    min-width: 30px;
+    min-height: 30px;
+  }
+
+  .keyboard button.special {
+    min-width: 50px;
+  }
+
+  .keyboard button.space {
+    min-width: 160px;
+  }
+
+  .keyboard button.enter,
+  .keyboard button.backspace,
+  .keyboard button.shift {
+    min-width: 65px;
+  }
+
+  .keyboard button.tab,
+  .keyboard button.ctrl,
+  .keyboard button.alt,
+  .keyboard button.windows,
+  .keyboard button.fn {
+    min-width: 40px;
+  }
+
+  /* Stack certain rows vertically on smaller screens */
+  .keyboard-row {
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 576px) {
+  .keyboard-tester h2 {
+    font-size: 18px;
+  }
+
+  .keyboard {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .keyboard button {
+    font-size: 8px;
+    min-width: 25px;
+    min-height: 25px;
+  }
+
+  .keyboard button.special {
+    min-width: 45px;
+  }
+
+  .keyboard button.space {
+    min-width: 140px;
+  }
+
+  .keyboard button.enter,
+  .keyboard button.backspace,
+  .keyboard button.shift {
+    min-width: 60px;
+  }
+
+  .keyboard button.tab,
+  .keyboard button.ctrl,
+  .keyboard button.alt,
+  .keyboard button.windows,
+  .keyboard button.fn {
+    min-width: 35px;
+  }
+
+  /* Further stack the rows for very small screens */
+  .keyboard-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .submit-button {
+    width: 80%;
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+
+
+
+/* Camera Tester */
+.camera-tester {
+  text-align: center;
+  margin: 20px;
+}
+
+.start-camera-button {
+  background-color: #007bff;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+.start-camera-button:hover {
+  background-color: #0056b3;
+}
+
+.camera-feed {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.video-frame {
+  width: 480px;
+  height: 240px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.camera-status {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.camera-status label {
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+/* Speaker Tester */
+.speaker-tester {
+  text-align: center;
+  margin: 20px;
+}
+
+.play-audio-button {
+  background-color: #007bff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.play-audio-button:hover {
+  background-color: #0056b3;
+}
+
+.speaker-status {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.speaker-status label {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.speaker-status input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  vertical-align: middle;
+}
+
+/* Mic Tester */
+.mic-tester {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+}
+
+.mic-tester h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.mic-tester .error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.record-button {
+  background-color: #007bff;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+
+.record-button:hover {
+  background-color: #0056b3;
+}
+
+.mic-tester .mic-status label {
+  padding: 10px 20px;
+  background-color: #e9ecef;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mic-tester .mic-status input[type="radio"]:checked + label {
+  background-color: #28a745;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Trackpad Tester */
+.trackpad-tester {
+  text-align: center;
+  margin: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.number-test, .line-test {
+  margin: 20px 0;
+}
+
+.number-options button, .line-options button {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.number-options button:hover, .line-options button:hover {
+  background-color: #ddd;
+}
+
+.paragraph {
+  margin: 20px auto;
+  padding: 12px;
+  width: 80%;
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+  line-height: 1.6;
+}
+
+.highlighted-text {
+  background-color: #ffff99;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.trackpad-status {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.status-options label {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.feedback {
+  font-size: 18px;
+  color: green;
+}
+
+/* Display Tester */
+.display-tester {
+  text-align: center;
+  padding: 20px;
+}
+
+.navigation-buttons {
+  margin: 20px 0;
+}
+
+.navigation-buttons button {
+  padding: 12px 24px;
+  border-radius: 6px;
+}
+
+.display-status label {
+  display: block;
+  margin: 10px 0;
+}
+
+.submit-button {
+  margin-top: 20px;
+  background-color: #007bff;
+  padding: 12px 24px;
+  border-radius: 6px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
 }
