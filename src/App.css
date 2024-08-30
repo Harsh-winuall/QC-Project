@@ -1104,7 +1104,7 @@ button:hover {
   width: 100%;
   background-color: #f1f1f1;
   border-radius: 8px;
-  margin: 20px auto;
+  margin: 10px auto 100px;
   max-width: 600px;
   position: relative;
 }
