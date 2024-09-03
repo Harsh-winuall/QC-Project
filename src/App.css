@@ -1175,3 +1175,69 @@ button:hover {
   background-color: #b0b0b0;
   cursor: not-allowed;
 }
+
+
+/* HotKeys Tester */
+
+
+.hotkey-tester {
+  text-align: center;
+}
+
+.hotkey-instructions {
+  margin: 20px 0;
+}
+
+.pressed-keys {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pressed-key {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #e0e0e0;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* Loader */
+
+/* src/components/Loader.css */
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the screen */
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+

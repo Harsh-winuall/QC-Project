@@ -29,7 +29,6 @@ function App() {
       <Routes>
         <Route path='/' index element={<WelcomeScreen/>}/>
         <Route path='/qc-process' element={<QCProcess/>}/>
-        <Route path='/user-details' element={<UserDetailsForm/>}/>
         <Route path='/confirm-start-qc' element={<StartQC/>}/>
       </Routes>
     </div>

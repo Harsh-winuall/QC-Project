@@ -1,10 +1,12 @@
 import { Button, Col, Row } from 'antd';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './Header';
 
 function StartQC() {
     const navigation = useNavigate();
+    const location = useLocation();
+    console.log(location.state);
     return (
         <div className="start-qc-container">
             <Header />
@@ -13,7 +15,7 @@ function StartQC() {
                 <Row justify="center">
                     <Col>
                         <Button onClick={() => { navigation(-1) }}>Back</Button>
-                        <Button type="primary" onClick={() => navigation('/qc-process')} style={{ marginLeft: '10px', }}>Yes</Button>
+                        <Button type="primary" onClick={() => navigation('/qc-process', {state:{...location.state}})} style={{ marginLeft: '10px', }}>Yes</Button>
                     </Col>
                 </Row>
             </div>

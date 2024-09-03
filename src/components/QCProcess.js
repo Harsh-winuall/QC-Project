@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import QCForm from './QCForm';
 import KeyboardTester from './SpecialQC/KeboardTester';
 import CameraTester from './SpecialQC/CameraTester';
@@ -6,14 +6,18 @@ import SpeakerTester from './SpecialQC/SpeakerTester';
 import MicTester from './SpecialQC/MicTester';
 import TrackpadTester from './SpecialQC/TrackpadTester';
 import DisplayTester from './SpecialQC/DisplayTester';
+import { useLocation } from 'react-router-dom';
+import HotkeyTester from './SpecialQC/HotkeyTester';
+import Loader from './Loader';
 
 const qcList = [
   // { name: 'Display Checking (dead pixel test)', type: 'displayTester'},
-  { name: 'Keyboard', type: 'keyboardTester' },
-  { name: 'Camera', type: 'cameraTester' },
-  { name: 'Speaker', type: 'speakerTester' },
-  { name: 'Mic', type: 'micTester' },
-  { name: 'Trackpad', type: 'trackpadTester' },
+  // { name: 'Keyboard', type: 'keyboardTester' },
+  // { name: 'Camera', type: 'cameraTester' },
+  // { name: 'Speaker', type: 'speakerTester' },
+  // { name: 'Mic', type: 'micTester' },
+  // { name: 'Trackpad', type: 'trackpadTester' },
+  {name: 'Hotkeys / Special Characters', type: 'hotkeyTester'},
   { name: 'Panel A', options: ['Perfect','Not Available', 'Major Scratches', 'Minor Scratches', 'Paint Faded', 'Crack/Broken Panel A', 'Minor Dent', 'Acceptable Scratches', 'Dents and Cracks','Good','Major Scratches (Panel A)'] },
   { name: 'Panel B', options: ['Perfect','Not Available', 'Major Scratches', 'Minor Scratches', 'Paint Faded', 'Crack/Broken Panel B', 'Minor Dent', 'Acceptable Scratches', 'Dents and Cracks','Good','Major Scratches (Panel B)'] },
   { name: 'Panel C', options: ['Perfect','Not Available', 'Major Scratches', 'Minor Scratches', 'Paint Faded', 'Crack/Broken Panel C', 'Minor Dent', 'Acceptable Scratches', 'Dents and Cracks','Good','Major Scratches (Panel C)'] },
@@ -34,32 +38,112 @@ const qcList = [
   {name: 'Fan Sound', options: ['Noisy', 'Working', 'Not Working']},
   {name: 'Lid Sensor', options: ['Working', 'Not Working']},
   {name: 'Type C ports', options: ['Working', 'Not Working', 'Not Available', 'Driver Not Detecting']},
+  {name: 'Battery status', options : ['Heating', 'Normal']},
+  {name: 'Hardware diagnostic Test', options: ['Passed', 'Failed', 'Warnings']},
+  {name:'Touch Screen', options: ['Not Available', 'Working', 'Not working']},
+  {name: 'Keypad/light', options: ['Working', 'Not Working', 'Partially Lit']},
+  {name: "Trackball", options: ['Not Available', 'Working', 'Rubber Missing', 'Driver Not Detecting', 'Low sencitivity']},
+  {name: "SYS TEMP", options: ['100%', '50%-75%','75%','Between 50C and 100C', 'less than 50C', 'Greater than 100C']},
+
+  
+
   // Add all your QCs here in the same format
 ];
 
 const QCProcess = () => {
+  const location = useLocation();
+  const {username, serialNo} = location.state;
   const [currentQCIndex, setCurrentQCIndex] = useState(0);
   const [qcData, setQcData] = useState({});
+  const [loading, setLoading] = useState(false); // State to track loading status
+  // const [newQcData, setNewQcData] = useState({});
+  // const [systemInfo, setSystemInfo] = useState({});
+  // const [finalData, setFinalData] = useState({});
 
-  const handleNext = (selectedOption) => {
-    const currentQC = qcList[currentQCIndex].name;
-    setQcData({ ...qcData, [currentQC]: selectedOption });
 
-    if (currentQCIndex < qcList.length - 1) {
-      setCurrentQCIndex(currentQCIndex + 1);
-    } else {
-      console.log('Submitting all QC data:', qcData);
-      fetch('/api/submit_all_qcs', {
+  async function handleQcClick() {
+    try {
+
+        setLoading(true);
+        // Fetch system info
+        const systemInfo = await fetchSystemInfo();
+        if (!systemInfo) {
+          console.error('System info not available, skipping final data preparation.');
+          return;
+        }
+
+        const updatedQcData = { ...qcData, ...systemInfo };
+        // setNewQcData(updatedQcData);
+
+
+        // Create the finalData object after systemInfo is fetched
+
+        const finalData = {
+          serialNo,
+          username,
+          qcData: updatedQcData, // Use the updated qcData
+        };
+
+        console.log('Final Data:', finalData);
+        setLoading(false); // Stop the loader after the operation is complete
+        // Proceed with submitting finalData or any other operation
+    } catch (error) {
+        console.error('Error fetching system info:', error);
+    }
+}
+
+  const fetchSystemInfo = async () => {
+    try {
+      const response = await fetch('/api/summary', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(qcData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch system info');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching system info:', error);
+      return null; // Return null or a default value in case of failure
+    }
+  };
+
+  const handleNext = (selectedOption) => {
+    const currentQC = qcList[currentQCIndex].name;
+    setQcData({ ...qcData, [currentQC]: selectedOption});
+
+    if (currentQCIndex < qcList.length - 1) {
+      setCurrentQCIndex(currentQCIndex + 1);
+    } else {
+
+      // fetch("/api/summary", 
+      //   {
+      //     method: "POST",
+      //     body: 'hello'
+      //   })
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     setSystemInfo(data)
+      //   }
+      // )
+
+      handleQcClick();
+      // console.log(qcData);
+      // console.log(systemInfo)
+      // fetch('/api/submit_all_qcs', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(finalData),
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //   });
     }
   };
 
@@ -68,7 +152,9 @@ const QCProcess = () => {
 
   return (
     <div>
-      {currentQCIndex < qcList.length ? (
+      {loading ? ( 
+        <Loader /> // Show the loader when loading is true
+      ) : currentQCIndex < qcList.length ? (
         currentQC.type === 'keyboardTester' ? (
           <KeyboardTester onNext={handleNext} />
         ) : currentQC.type === 'cameraTester' ? (
@@ -81,6 +167,8 @@ const QCProcess = () => {
           <TrackpadTester onNext={handleNext} />
         ) : currentQC.type === 'displayTester' ? (
           <DisplayTester onNext={handleNext} />
+        ) : currentQC.type === 'hotkeyTester' ? (
+          <HotkeyTester onNext={handleNext}/>
         ) : (
           <QCForm qc={currentQC} onNext={handleNext} />
         )

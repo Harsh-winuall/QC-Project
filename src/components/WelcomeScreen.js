@@ -11,7 +11,7 @@ export const WelcomeScreen = () => {
 
     const handleNext = () => {
         if (serialNo && username) {
-            navigation("/user-details", { state: { serialNo, username } });
+            navigation("/confirm-start-qc", { state: { serialNo, username } });
         }
     };
 
