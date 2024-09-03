@@ -22,7 +22,6 @@
     "start-api": "cd api && venv\\Scripts\\flask run --no-debugger",
     "test": "react-scripts test",
     "test-api": "cd api && flask test",
-    "eject": "react-scripts eject",
     "start-both": "concurrently \"npm run start\" \"npm run start-api\" \"npm run electron\"",
     "electron": "electron .",
     "dist": "electron-builder"
