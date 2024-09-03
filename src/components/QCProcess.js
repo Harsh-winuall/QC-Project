@@ -12,11 +12,11 @@ import Loader from './Loader';
 
 const qcList = [
   // { name: 'Display Checking (dead pixel test)', type: 'displayTester'},
-  // { name: 'Keyboard', type: 'keyboardTester' },
-  // { name: 'Camera', type: 'cameraTester' },
-  // { name: 'Speaker', type: 'speakerTester' },
-  // { name: 'Mic', type: 'micTester' },
-  // { name: 'Trackpad', type: 'trackpadTester' },
+  { name: 'Keyboard', type: 'keyboardTester' },
+  { name: 'Camera', type: 'cameraTester' },
+  { name: 'Speaker', type: 'speakerTester' },
+  { name: 'Mic', type: 'micTester' },
+  { name: 'Trackpad', type: 'trackpadTester' },
   {name: 'Hotkeys / Special Characters', type: 'hotkeyTester'},
   { name: 'Panel A', options: ['Perfect','Not Available', 'Major Scratches', 'Minor Scratches', 'Paint Faded', 'Crack/Broken Panel A', 'Minor Dent', 'Acceptable Scratches', 'Dents and Cracks','Good','Major Scratches (Panel A)'] },
   { name: 'Panel B', options: ['Perfect','Not Available', 'Major Scratches', 'Minor Scratches', 'Paint Faded', 'Crack/Broken Panel B', 'Minor Dent', 'Acceptable Scratches', 'Dents and Cracks','Good','Major Scratches (Panel B)'] },
