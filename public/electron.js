@@ -34,7 +34,9 @@ function startFlaskServer() {
     venvPath = path.join(process.resourcesPath, 'api', 'venv', 'Scripts', 'python.exe');
   }
   
-  const scriptPath = path.join(process.resourcesPath, 'api', 'api.py');
+  const scriptPath = process.env.NODE_ENV === 'development'
+  ? path.join(__dirname, '..', 'api', 'api.py')
+  : path.join(process.resourcesPath, 'api', 'api.py');  // Correct path in production
 
   console.log(`Starting Flask server with Python at: ${venvPath}`);
   console.log(`Using script path: ${scriptPath}`);
