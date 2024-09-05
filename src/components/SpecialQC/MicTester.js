@@ -34,6 +34,7 @@ const MicTester = ({ onNext }) => {
 
         speechRecognition.onerror = (event) => {
             setError(`Speech recognition error: ${event.error}`);
+            setMicStatus('Unclear');
         };
 
         setRecognition(speechRecognition);
