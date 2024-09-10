@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Header from '../Header';
+import CopyrightComponent from '../CopyrightComponent';
+import { useNavigate } from 'react-router-dom';
 
 const CameraTester = ({ onNext }) => {
   const [cameraStatus, setCameraStatus] = useState('');
   const videoRef = useRef(null);
   const [stream, setStream] = useState(null);
+  const navigation = useNavigate();
 
   // Function to start the camera
   const startCamera = async () => {
@@ -44,10 +47,18 @@ const CameraTester = ({ onNext }) => {
   };
 
   return (
-    <dic className="camera-tester-container">
+    <div className="camera-tester-container">
       <Header/>
       <div className="camera-tester">
-        <h2>Camera Test</h2>
+        <div className="keyboard-tester-title">
+            <div style={{width:"985px", height:"84px", gap:4}}>
+              <div style={{display:"flex", alignItems:"center", gap:40}}>
+                <i onClick={()=> navigation(-1)} class="fa-solid fa-circle-chevron-left" style={{fontSize:"20px", cursor:"pointer"}}></i>
+                <div style={{fontWeight:500, width:"385px", height:"40px", fontSize:"24px", lineHeight:"40px", color:"#101112"}}>Camera Test</div>
+              </div>
+              <div style={{width:"985px", height:"40px", fontWeight:"400", fontSize:"18px", lineHeight:"16px", color:"#656B70"}}>Start camera by giving permission and mention the issue faced.</div>
+            </div>
+        </div>
         <button onClick={startCamera} className="start-camera-button">Start Camera</button>
         <div className="camera-feed">
           <video ref={videoRef} autoPlay className="video-frame" />
@@ -90,9 +101,12 @@ const CameraTester = ({ onNext }) => {
             Foggy Image
           </label>
         </div>
-        <button onClick={handleSubmit} className="submit-button">Next</button>
+        <div className="button-frame">
+          <button onClick={handleSubmit} className="next-btn">NEXT</button>
+        </div>
       </div>
-    </dic>
+      <CopyrightComponent/>
+    </div>
   );
 };
 

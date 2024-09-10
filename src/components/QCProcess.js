@@ -9,6 +9,9 @@ import DisplayTester from './SpecialQC/DisplayTester';
 import { useLocation } from 'react-router-dom';
 import HotkeyTester from './SpecialQC/HotkeyTester';
 import Loader from './Loader';
+import { Steps } from 'antd';
+
+const { Step } = Steps;
 
 const qcList = [
   // { name: 'Display Checking (dead pixel test)', type: 'displayTester'},
@@ -57,21 +60,25 @@ const QCProcess = () => {
   const [qcData, setQcData] = useState({});
   const [loading, setLoading] = useState(false); // State to track loading status
   // const [newQcData, setNewQcData] = useState({});
-  // const [systemInfo, setSystemInfo] = useState({});
+  const [systemInfo, setSystemInfo] = useState({});
   // const [finalData, setFinalData] = useState({});
+
+  useEffect(()=>{
+    getSystemInfo();
+  },[]);
 
 
   async function handleQcClick() {
     try {
-
         setLoading(true);
         // Fetch system info
-        const systemInfo = await fetchSystemInfo();
-        if (!systemInfo) {
-          console.error('System info not available, skipping final data preparation.');
-          return;
-        }
+        // const systemInfo = await fetchSystemInfo();
+        // if (!systemInfo) {
+        //   console.error('System info not available, skipping final data preparation.');
+        //   return;
+        // }
 
+        // setSystemInfo({...systemInfo});
         const updatedQcData = { ...qcData, ...systemInfo };
         // setNewQcData(updatedQcData);
 
@@ -90,7 +97,16 @@ const QCProcess = () => {
     } catch (error) {
         console.error('Error fetching system info:', error);
     }
-}
+  }
+
+  async function getSystemInfo(){
+    const systemInfo = await fetchSystemInfo();
+    if (!systemInfo) {
+      console.error('System info not available, skipping final data preparation.');
+      return;
+    }
+    setSystemInfo({...systemInfo});
+  }
 
   const fetchSystemInfo = async () => {
     try {
@@ -151,7 +167,16 @@ const QCProcess = () => {
   let progressMarkWidth = Math.floor((currentQCIndex * 100) / (qcList.length));
 
   return (
-    <div>
+    <div style={{textAlign:"center"}}>
+
+      {/* Stepper at the top */}
+      <div style={{ margin: '100px', overflowX: 'auto', whiteSpace: 'nowrap', overflowX:"auto", scrollbarWidth: "none", msOverflowStyle: "none" }}>
+        <Steps current={currentQCIndex} style={{ display: 'inline-block', width: '100%' }}> {/* Allow horizontal scrolling */}
+          {qcList.map((qc, index) => (
+            <Step key={index}/>))} {/* Display step numbers */}
+        </Steps>
+      </div>
+
       {loading ? ( 
         <Loader /> // Show the loader when loading is true
       ) : currentQCIndex < qcList.length ? (
@@ -176,7 +201,7 @@ const QCProcess = () => {
         <h2>All QCs Completed!</h2>
       )}
 
-      <div className='progress-bar-container'>
+      {/* <div className='progress-bar-container'>
         <div
           className='progress-marker'
           style={{
@@ -185,7 +210,7 @@ const QCProcess = () => {
         >
           {progressMarkWidth}%
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

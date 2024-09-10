@@ -11,7 +11,8 @@ async function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
+      contextIsolation:true,
+      nodeIntegration: false,
       webSecurity: false,
     },
   });
@@ -57,7 +58,7 @@ function startFlaskServer() {
 }
 
 app.on('ready', () => {
-  startFlaskServer();
+  // startFlaskServer();
   createWindow();
 });
 

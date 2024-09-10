@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header';
+import { useNavigate } from 'react-router-dom';
+import CopyrightComponent from '../CopyrightComponent';
+
 
 const KeyboardTester = ({ onNext }) => {
   const [pressedKeys, setPressedKeys] = useState([]);
+  const navigation = useNavigate();
 
   const keyboardLayout = [
     ['Esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'PrtSc', 'Scroll Lock', 'Pause'],
@@ -65,7 +69,16 @@ const KeyboardTester = ({ onNext }) => {
     <div className="keyboard-container">
       <Header/>
       <div className="keyboard-tester">
-        <h2>Press all keys on the keyboard</h2>
+        <div className="keyboard-tester-title">
+          <div style={{width:"985px", height:"84px", gap:4}}>
+            <div style={{display:"flex", alignItems:"center", gap:40}}>
+              <i onClick={()=> navigation(-1)} class="fa-solid fa-circle-chevron-left" style={{fontSize:"20px", cursor:"pointer"}}></i>
+              <div style={{fontWeight:500, width:"385px", height:"40px", fontSize:"24px", lineHeight:"40px", color:"#101112"}}>Press all the keys on the keyboard</div>
+            </div>
+            <div style={{width:"985px", height:"40px", fontWeight:"400", fontSize:"18px", lineHeight:"16px", color:"#656B70"}}>Press all the keys on the keyboard to </div>
+          </div>
+        </div>
+
         <div className="keyboard">
           {keyboardLayout.map((row, rowIndex) => (
             <div key={rowIndex} className={`keyboard-row row-${rowIndex}`}>
@@ -77,8 +90,11 @@ const KeyboardTester = ({ onNext }) => {
             </div>
           ))}
         </div>
-        <button onClick={handleSubmit} className="submit-button">Next</button>
+        <div className="button-frame">
+          <button onClick={handleSubmit} className="next-btn">NEXT</button>
+        </div>
       </div>
+      <CopyrightComponent/>
     </div>
   );
 };

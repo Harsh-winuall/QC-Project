@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f0f2f5;
+  background-color: white;
   margin: 0;
   padding: 0;
   color: #333;
@@ -31,20 +31,7 @@ h1, h2 {
   border-radius: 10px;
 }
 
-/* Buttons */
-button {
-  display: inline-block;
-  margin: 20px 0;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+
 
 button:disabled {
   background-color: #ccc;
@@ -119,64 +106,98 @@ a:hover {
 
 /* Welcome Screen Container */
 .welcome-screen-container {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f0f2f5;
+  background-color: #ffffff;
   /* padding: 20px; */
 }
 
 /* Header */
 .welcome-screen-header {
   display: flex;
-  position: sticky;
+  position: fixed;
   width: 100%;
+  height: 87px;
   z-index: 30;
   top: 0;
-  left: 0;
+  left: -1px;
   right: 0;
-  padding: 16px 40px;
-  /* align-items: center; */
-  /* justify-content: center; */
+  padding: 16px 40px 16px 40px;
+  gap: 880px;
   background-color: #fff;
-  border-bottom: 2px solid #f0f2f5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #DDE2E7;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.border{
+  position: absolute;
+  width: 1px;
+  height: 100vh;
+  background-color: #DDE2E7;
+  
 }
 
 /* Welcome Screen Footer */
 .welcome-screen-footer {
-  background-color: #f9f9f9;
+  height: 90px;
+  top: 537px;
+  left: 38px;
+  gap: 16px;
+  width: 410px;
   padding: 20px;
-  text-align: center;
-  border-top: 2px solid #e0e0e0;
-  margin-top: 40px;
-  /* box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.content{
+  width: 410px;
+  height: 35px;
+  text-align: left;
 }
 
 .footer-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #007bff;
-  margin-bottom: 10px;
+  width: 280px;
+  height: 15px;
+  font-weight: 500;
+  line-height: 15.4px;
+  font-size: 14px;
+  color: #000000;
 }
 
 .footer-subtitle {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 20px;
+  color: gray;
+  top: 15px;
+  gap: 10px;
+  padding: 3px 8px 3px 0px;
+  width: 410px;
+  height: 20px;
 }
 
-.footer-contact {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 10px;
+.footer-bottom {
+  width: 187px;
+  height: 39px;
+  /* gap: 4px; */
+  text-align: left;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  color: #8E969E;
 }
 
-.footer-contact a {
-  color: #007bff;
+.footer-bottom p{
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  color: #8E969E;
+}
+
+.footer-bottom a {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  color: #8E969E;
 }
 
 .footer-contact a:hover {
@@ -209,21 +230,40 @@ a:hover {
 /* Image Column */
 .welcome-screen-image-col {
   display: flex;
+  flex-flow: column;
+  width: 680px;
+  top: 3px;
+  height: 680px;
   align-items: center;
   justify-content: center;
+
 }
 
 .welcome-screen-image {
-  width: 100%;
-  max-width: 650px;
+  width: 496px;
+  height: 313px;
+  top: 158px;
+  left: 22px;
 }
 
 /* Form Column */
 .welcome-screen-form-col {
+  display: flex;
+  flex-flow: column;
   background-color: #fff;
-  padding: 30px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 456px;
+  height: 304px;
+  gap: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+}
+
+.welcome-form{
+  display: flex;
+  flex-direction: column;
+  width:456px;
+  height:120px;
+  gap:40px
 }
 
 .welcome-screen-title {
@@ -234,21 +274,40 @@ a:hover {
   text-align: center;
 }
 
+.main-content{
+  width:456px; height:304px; gap:40px
+}
+
+.form-title{
+  width:456px;
+  height:56px;
+  gap:16px;
+  
+}
+
 /* Input Fields */
 .welcome-screen-input {
+  width: 420px;
+  height: 20px;
+  font-weight: 400;
   font-size: 16px;
-  padding: 10px;
-  border-radius: 8px;
+  line-height: 28px;
+  padding: 8px 0px;
+  gap: 16px;
+  border: 0px;
 }
 
 /* Button */
 .welcome-screen-button {
-  background: #007bff;
+  background: black;
   font-size: 18px;
   font-weight: 600;
-  padding: 14px 0;
-  border-radius: 8px;
-  width: 100%;
+  padding: 20px 29px;
+  border-radius: 2px;
+  gap: 10px;
+  width: 176px;
+  top: 256px;
+  height: 48px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -365,31 +424,64 @@ a:hover {
 /* Start QC Page */
 
 .start-qc-container {
+  height: 680px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+
+
 .content-wrapper {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
+}
+
+.right-content{
+  display: flex;
+  flex-direction: column;
+  width: 456px;
+  height: 156px;
+  top: 238px;
+  left: 575px;
+  gap: 40px;
+}
+
+.confirm-btn{
+  display: flex;
+  width:264px; height:48px; gap:40px; text-align: left;
+}
+
+.confirm-btn button{
+  width: 112px;
+  height: 48px;
+  border-radius: 4px;
+  background-color: #000000;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-weight: 500;
 }
 
 
 
 /* General Styles */
 .keyboard-tester {
-  text-align: center;
-  margin: 20px;
+  width: 985px;
+  height: 354.02px;
+  /* position: absolute; */
+  /* top: 129px; */
+  /* left: 43px; */
+  margin: 316px auto;
+  gap: 44px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
 }
 
 .keyboard-tester h2 {
@@ -468,15 +560,27 @@ a:hover {
   min-width: 55px; /* Control, Alt, Windows, Fn keys */
 }
 
-.submit-button {
-  background-color: #007bff;
+.next-btn {
+  background-color: #101112;
+  gap: 10px;
+  padding: 20px 29px;
+  width: 176px;
+  height: 48px;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 12px 24px;
   cursor: pointer;
   font-size: 18px;
   transition: background-color 0.3s ease;
+}
+
+.button-frame{
+  width: 985px;
+  height: 48px;
+  gap: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .submit-button:hover {
@@ -640,13 +744,44 @@ a:hover {
   }
 }
 
+.copyrightContent{
+  width: 1072px;
+  height: 24px;
+  padding: 0px 32px;
+  gap: 64px;
+
+}
+
+.copyrightText{
+  width: 1008px;
+  height: 24px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 24px;
+  color: #8E969E;
+}
 
 
 
 /* Camera Tester */
+
+.camera-tester-container{
+  display: flex;
+  flex-direction: column;
+}
+
+
 .camera-tester {
   text-align: center;
-  margin: 20px;
+  margin: 20px auto;
+  width: 985px;
+  height: 645.02px;
+  position: absolute;
+  top: 109px;
+  left: 43px;
+  gap: 44px;
+  /* border: 2px solid black; */
+  margin-left: 280px;
 }
 
 .start-camera-button {
@@ -671,9 +806,10 @@ a:hover {
 }
 
 .video-frame {
-  width: 100%;
-  max-width: 480px;
-  height: auto;
+  width: 408px;
+  height: 285px;
+  gap: 0px;
+  opacity: 0px;
   border: 2px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -681,11 +817,13 @@ a:hover {
 
 .camera-status {
   display: flex;
-  justify-content: center;
   flex-direction: row;
-  gap: 30px;
-  align-items: center;
-  margin-top: 20px;
+  justify-content: center;
+  width: Fill (985px)px;
+  height: Fixed (30px)px;
+  gap: 32px;
+  opacity: 0px;
+  
 }
 
 .camera-status label {

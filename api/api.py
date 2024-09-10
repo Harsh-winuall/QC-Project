@@ -37,7 +37,7 @@ def get_system_info():
     data["OS_VERSION"] = get_os_version()
     data["Ethernet_port"] = get_ethernet_port_status()
     data["BIOS_update"] = get_bios_update_status()
-    data["Device_Manager"] = run_command("devmgmt.msc") if platform.system() == "Windows" else "Not applicable"
+    data["Device_Manager"] = get_device_manager_status()
     data["Facial_recognition"] = get_facial_recognition_status()
     data["Fingerprint"] = get_fingerprint_status()
     data["Battery sudden Drop"] = monitor_battery_drop()
@@ -73,6 +73,34 @@ def run_command(command):
             return f"Command failed with exit status {result.returncode}: {result.stderr.strip()}"
     except Exception as e:
         return str(e)
+
+def check_device_manager_status():
+    if platform.system() == "Windows":
+        # Fetch a list of devices using WMIC and check their status
+        return run_command("wmic path Win32_PnPEntity get Name,Status")
+    else:
+        return "Not applicable"
+    
+def get_device_manager_status():
+    """Check driver installation status using WMIC."""
+    if platform.system() == "Windows":
+        try:
+            # Get all PnP devices and their drivers' last install date
+            command = 'wmic path Win32_PnPSignedDriver get DeviceName,DriverDate'
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+            # Analyze the driver dates to determine if any are outdated
+            devices = result.stdout.splitlines()
+            outdated_devices = [device for device in devices if "2022" not in device]  # Assuming 2022 as a recent year
+            
+            if len(outdated_devices) > 0:
+                return "Pending updates"
+            else:
+                return "Updated"
+        except Exception as e:
+            return f"Error checking device updates: {str(e)}"
+    else:
+        return "Not applicable"
     
 # Checking for sfc_scannow 
 def get_sfc_scan_status():
@@ -93,6 +121,7 @@ def get_sfc_scan_status():
         return "Major Issues"
     else:
         return "Unknown"
+
     
 # Battery Backup
 

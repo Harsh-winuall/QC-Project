@@ -19,20 +19,24 @@ const QCForm = ({ qc, onNext }) => {
     <div className="qcform-container">
       <Header/>
       <form onSubmit={handleSubmit} className="qc-form">
-        <h2>{qc.name}</h2>
-        {qc.options.map((option, index) => (
-          <div key={index}>
-            <label>
-              <input
-                type="radio"
-                value={option}
-                checked={selectedOption === option}
-                onChange={handleChange}
-              />
-              {option}
-            </label>
+        <h2 className='qcform-title'>{qc.name}</h2>
+        <div className="qcform-subtitle">Please select the condition of the device’s Panel B.</div>
+        <div className="qc-options">
+            {qc.options.map((option, index) => (
+              <div key={index} className="qc-option">
+                <label className={`radio-label ${selectedOption === option ? 'selected' : ''}`}>
+                  <input
+                    type="radio"
+                    value={option}
+                    checked={selectedOption === option}
+                    onChange={handleChange}
+                  />
+                  <span className="radio-custom"></span>
+                  {option}
+                </label>
+              </div>
+            ))}
           </div>
-        ))}
         
         <button type="submit" disabled={!selectedOption}>Next</button>
       </form>

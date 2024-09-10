@@ -4,14 +4,18 @@
   "private": true,
   "homepage": "./",
   "main": "public/electron.js",
+  "author": "Harsh-winuall",
+  "description": "React-electron-flask app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.20.3",
+    "child_process": "^1.0.2",
     "concurrently": "^8.2.2",
     "ejs": "^3.1.9",
     "electron-is-dev": "^3.0.1",
+    "electron-squirrel-startup": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.26.1",
@@ -21,14 +25,12 @@
   "scripts": {
     "start": "react-scripts start",
     "start-api": "cd api && venv\\Scripts\\flask run --no-debugger",
-    "test": "react-scripts test",
-    "test-api": "cd api && flask test",
     "start-both": "concurrently \"npm run start\" \"npm run start-api\" \"npm run electron\"",
     "electron": "electron .",
     "build": "react-scripts build",
-    "predist": "copy public\\electron.js build\\electron.js",
-    "postdist": "xcopy /E /I /Y api\\ dist\\api",
-    "dist": "npm run predist && npm run build && electron-builder && npm run postdist"
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "start-electron": "electron-forge start"
   },
   "build": {
     "appId": "com.qcapp.id",
@@ -36,13 +38,16 @@
     "files": [
       "build/**/*",
       "public/**/*",
-      "api/**/*"   
+      "api/**/*",
+      "src/**/*"
     ],
     "extraResources": [
       {
         "from": "api/",
         "to": "api/",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "directories": {
@@ -88,7 +93,7 @@
   },
   "proxy": "http://127.0.0.1:5000",
   "devDependencies": {
-    "electron": "^32.0.1",
-    "electron-builder": "^24.13.3"
+    "@electron/fuses": "^1.8.0",
+    "electron": "^32.0.1"
   }
 }
